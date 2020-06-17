@@ -114,7 +114,4 @@ document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
     calculator.keyDown(button.getAttribute("type"), button.textContent);
   });
-  button.addEventListener("touchstart", () => {
-    calculator.keyDown(button.getAttribute("type"), button.textContent);
-  });
 });
