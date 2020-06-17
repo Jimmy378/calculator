@@ -14,18 +14,15 @@
 body {
   background-color: var(--grey);
   font-family: "Roboto", sans-serif;
+  margin: 0;
 }
 
 .container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  min-height: 100vh;
 }
 
 .calculator {
