@@ -1,3 +1,5 @@
+alert("js loading");
+
 class Calculator {
   displayValue = "0";
   firstOperand = null;
