@@ -1,127 +1,120 @@
 document.addEventListener("touchstart", function () {}, false);
 
-// class Calculator {
-//   displayValue = "0";
-//   firstOperand = null;
-//   waitingForSecondOperand = false;
-//   operator = null;
+function Calculator() {
+  let displayValue = "0";
+  let firstOperand = null;
+  let waitingForSecondOperand = false;
+  let operator = null;
 
-//   constructor() {
-//     this.updateDisplay();
-//   }
+  updateDisplay();
 
-//   updateDisplay() {
-//     const display = document.querySelector(".result p");
-//     display.textContent = this.displayValue;
-//   }
+  function updateDisplay() {
+    const display = document.querySelector(".result p");
+    display.textContent = displayValue;
+  }
 
-//   inputDigit(digit) {
-//     if (this.waitingForSecondOperand === true) {
-//       this.displayValue = digit;
-//       this.waitingForSecondOperand = false;
-//     } else {
-//       this.displayValue =
-//         this.displayValue === "0" ? digit : this.displayValue + digit;
-//     }
-//   }
+  function inputDigit(digit) {
+    if (waitingForSecondOperand === true) {
+      displayValue = digit;
+      waitingForSecondOperand = false;
+    } else {
+      displayValue = displayValue === "0" ? digit : displayValue + digit;
+    }
+  }
 
-//   inputDecimal(dot) {
-//     if (this.waitingForSecondOperand === true) return;
-//     if (!this.displayValue.includes(dot)) {
-//       this.displayValue += dot;
-//     }
-//   }
+  function inputDecimal(dot) {
+    if (waitingForSecondOperand === true) return;
+    if (!displayValue.includes(dot)) {
+      displayValue += dot;
+    }
+  }
 
-//   performCalculation = (operator, firstOperand, secondOperand) => {
-//     switch (operator) {
-//       case "÷":
-//         return firstOperand / secondOperand;
+  function performCalculation(operator, firstOperand, secondOperand) {
+    switch (operator) {
+      case "÷":
+        return firstOperand / secondOperand;
 
-//       case "×":
-//         return firstOperand * secondOperand;
+      case "×":
+        return firstOperand * secondOperand;
 
-//       case "+":
-//         return firstOperand + secondOperand;
+      case "+":
+        return firstOperand + secondOperand;
 
-//       case "−":
-//         return firstOperand - secondOperand;
+      case "−":
+        return firstOperand - secondOperand;
 
-//       case "=":
-//         return secondOperand;
+      case "=":
+        return secondOperand;
 
-//       default:
-//         return secondOperand;
-//     }
-//   };
+      default:
+        return secondOperand;
+    }
+  }
 
-//   handleOperator(nextOperator) {
-//     const inputValue = parseFloat(this.displayValue);
+  function handleOperator(nextOperator) {
+    const inputValue = parseFloat(displayValue);
 
-//     if (this.operator && this.waitingForSecondOperand) {
-//       this.operator = nextOperator;
-//       return;
-//     }
+    if (operator && waitingForSecondOperand) {
+      operator = nextOperator;
+      return;
+    }
 
-//     if (this.firstOperand == null) {
-//       this.firstOperand = inputValue;
-//     } else if (this.operator) {
-//       const result = this.performCalculation(
-//         this.operator,
-//         this.firstOperand,
-//         inputValue
-//       );
+    if (firstOperand == null) {
+      firstOperand = inputValue;
+    } else if (operator) {
+      const result = performCalculation(operator, firstOperand, inputValue);
 
-//       this.displayValue = String(result);
-//       this.firstOperand = result;
-//     }
+      displayValue = String(result);
+      firstOperand = result;
+    }
 
-//     this.waitingForSecondOperand = true;
-//     this.operator = nextOperator;
-//   }
+    waitingForSecondOperand = true;
+    operator = nextOperator;
+  }
 
-//   reset() {
-//     this.displayValue = "0";
-//     this.firstOperand = null;
-//     this.waitingForSecondOperand = false;
-//     this.operator = null;
-//   }
+  function reset() {
+    displayValue = "0";
+    firstOperand = null;
+    waitingForSecondOperand = false;
+    operator = null;
+  }
 
-//   keyDown(type, value) {
-//     switch (type) {
-//       case "number":
-//         this.inputDigit(value);
-//         this.updateDisplay();
-//         break;
+  this.keyDown = function (type, value) {
+    switch (type) {
+      case "number":
+        inputDigit(value);
+        updateDisplay();
+        break;
 
-//       case "decimal":
-//         this.inputDecimal(value);
-//         this.updateDisplay();
-//         break;
+      case "decimal":
+        inputDecimal(value);
+        updateDisplay();
+        break;
 
-//       case "clear":
-//         this.reset();
-//         this.updateDisplay();
-//         break;
+      case "clear":
+        reset();
+        updateDisplay();
+        break;
 
-//       case "operator":
-//       case "equals":
-//         this.handleOperator(value);
-//         this.updateDisplay();
-//         break;
+      case "operator":
+      case "equals":
+        handleOperator(value);
+        updateDisplay();
+        break;
 
-//       default:
-//         break;
-//     }
-//   }
-// }
+      default:
+        break;
+    }
+  };
+}
 
-// let calculator = new Calculator();
+let calculator = new Calculator();
 
-// document.querySelectorAll(".button").forEach((button) => {
-//   button.addEventListener("click", () => {
-//     calculator.keyDown(button.getAttribute("type"), button.textContent);
-//   });
-//   button.addEventListener("touchstart", () => {
-//     calculator.keyDown(button.getAttribute("type"), button.textContent);
-//   });
-// });
+document.querySelectorAll(".button").forEach((button) => {
+  button.addEventListener("click", () => {
+    calculator.keyDown(button.getAttribute("type"), button.textContent);
+  });
+  button.addEventListener("touchstart", () => {
+    calculator.keyDown(button.getAttribute("type"), button.textContent);
+  });
+});
