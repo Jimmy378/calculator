@@ -1,6 +1,5 @@
-console.log("working");
 alert("working");
-// document.addEventListener("touchstart", function () {}, false);
+document.addEventListener("touchstart", function () {}, false);
 
 // class Calculator {
 //   displayValue = "0";
