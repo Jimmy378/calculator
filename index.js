@@ -1,4 +1,3 @@
-alert("working");
 document.addEventListener("touchstart", function () {}, false);
 
 // class Calculator {
