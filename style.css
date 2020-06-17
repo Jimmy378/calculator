@@ -1,0 +1,87 @@
+:root {
+  --grey: rgb(230, 230, 230);
+  --greyLight: rgb(240, 240, 240);
+  --greyDark: rgb(220, 220, 220);
+  --text: rgb(180, 180, 180);
+  --textDark: rgb(130, 130, 130);
+  --accent: rgb(0, 146, 146);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--grey);
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.calculator {
+  background-color: var(--grey);
+  flex: 1;
+  max-width: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: -10px -10px 20px var(--greyLight), 10px 10px 20px var(--greyDark);
+  padding: 20px;
+}
+
+.result {
+  height: 150px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.result > p {
+  text-align: right;
+  font-size: 4rem;
+  color: var(--accent);
+}
+
+.buttonGrid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.button {
+  height: 100%;
+  min-height: 60px;
+  background-color: var(--grey);
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: -5px -5px 10px var(--greyLight), 5px 5px 10px var(--greyDark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: var(--text);
+  user-select: none;
+}
+
+.button:active {
+  box-shadow: -5px -5px 10px var(--greyLight) inset,
+    5px 5px 10px var(--greyDark) inset;
+}
+
+.button:nth-child(8) {
+  grid-row: span 4;
+}
+
+.operator {
+  color: var(--accent);
+}
