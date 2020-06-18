@@ -1,10 +1,12 @@
 :root {
   --grey: rgb(230, 230, 230);
-  --greyLight: rgb(240, 240, 240);
-  --greyDark: rgb(220, 220, 220);
+  --greyLight: rgb(250, 250, 250);
+  --greyDark: rgb(210, 210, 210);
   --text: rgb(180, 180, 180);
   --textDark: rgb(130, 130, 130);
   --accent: rgb(0, 146, 146);
+  --accentDark: rgb(0, 105, 105);
+  --accentLight: rgb(0, 179, 179);
 }
 
 * {
@@ -90,4 +92,11 @@ body {
 
 .operator {
   color: var(--accent);
+}
+
+.engaged {
+  background-color: var(--accent);
+  color: white;
+  box-shadow: -5px -5px 10px var(--accentLight) inset,
+    5px 5px 10px var(--accentDark) inset;
 }

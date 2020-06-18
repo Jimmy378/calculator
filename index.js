@@ -31,19 +31,19 @@ function Calculator() {
 
   function performCalculation(operator, firstOperand, secondOperand) {
     switch (operator) {
-      case "÷":
+      case "divide":
         return firstOperand / secondOperand;
 
-      case "×":
+      case "multiply":
         return firstOperand * secondOperand;
 
-      case "+":
+      case "add":
         return firstOperand + secondOperand;
 
-      case "−":
+      case "subtract":
         return firstOperand - secondOperand;
 
-      case "=":
+      case "equals":
         return secondOperand;
 
       default:
@@ -51,8 +51,62 @@ function Calculator() {
     }
   }
 
+  function handleEngage(operator) {
+    let divide = document.querySelector("#divide");
+    let multiply = document.querySelector("#multiply");
+    let add = document.querySelector("#add");
+    let subtract = document.querySelector("#subtract");
+
+    if (operator) {
+      switch (operator) {
+        case "divide":
+          divide.classList.add("engaged");
+          multiply.classList.remove("engaged");
+          add.classList.remove("engaged");
+          subtract.classList.remove("engaged");
+          break;
+
+        case "multiply":
+          divide.classList.remove("engaged");
+          multiply.classList.add("engaged");
+          add.classList.remove("engaged");
+          subtract.classList.remove("engaged");
+          break;
+
+        case "add":
+          divide.classList.remove("engaged");
+          multiply.classList.remove("engaged");
+          add.classList.add("engaged");
+          subtract.classList.remove("engaged");
+          break;
+
+        case "subtract":
+          divide.classList.remove("engaged");
+          multiply.classList.remove("engaged");
+          add.classList.remove("engaged");
+          subtract.classList.add("engaged");
+          break;
+
+        case "equals":
+        default:
+          divide.classList.remove("engaged");
+          multiply.classList.remove("engaged");
+          add.classList.remove("engaged");
+          subtract.classList.remove("engaged");
+          break;
+      }
+    } else {
+      divide.classList.remove("engaged");
+      multiply.classList.remove("engaged");
+      add.classList.remove("engaged");
+      subtract.classList.remove("engaged");
+    }
+  }
+
   function handleOperator(nextOperator) {
     const inputValue = parseFloat(displayValue);
+
+    handleEngage(nextOperator);
 
     if (operator && waitingForSecondOperand) {
       operator = nextOperator;
@@ -77,9 +131,10 @@ function Calculator() {
     firstOperand = null;
     waitingForSecondOperand = false;
     operator = null;
+    handleEngage();
   }
 
-  this.keyDown = function (type, value) {
+  this.keyDown = function (type, value, operator) {
     switch (type) {
       case "number":
         inputDigit(value);
@@ -98,7 +153,7 @@ function Calculator() {
 
       case "operator":
       case "equals":
-        handleOperator(value);
+        handleOperator(operator);
         updateDisplay();
         break;
 
@@ -112,6 +167,10 @@ let calculator = new Calculator();
 
 document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
-    calculator.keyDown(button.getAttribute("type"), button.textContent);
+    calculator.keyDown(
+      button.getAttribute("type"),
+      button.textContent,
+      button.getAttribute("operator")
+    );
   });
 });
